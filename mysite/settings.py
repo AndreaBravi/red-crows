@@ -61,12 +61,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE' : 'django_mongodb_engine',
-        'NAME' : 'heroku_app34239140',
-        'USER' : 'heroku_app34239140',
-        'PASSWORD' : 'v0m9brudt1e1t45aclj50trh82',
-        'HOST' : 'ds049161.mongolab.com',
-        'PORT' : '49161'
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : 'ddu3dititnd26h',
+        'USER' : 'dxwexmyuwpwdcx',
+        'PASSWORD' : '6Q4HcLR0SEeXsBVQff3Al8mDQi',
+        'HOST' : 'ec2-107-21-104-188.compute-1.amazonaws.com',
+        'PORT' : '5432'
     }
 }
 
