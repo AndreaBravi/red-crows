@@ -3,9 +3,9 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 
-from framework.models import Choice, Poll
+from framework.models import Choice, Poll, Musician, Review, Reviewer
 
-class IndexView(generic.ListView):
+class IndexView2(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_poll_list'
 
@@ -16,7 +16,6 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Poll
     template_name = 'polls/detail.html'
-
 
 class ResultsView(generic.DetailView):
     model = Poll
@@ -39,3 +38,18 @@ def vote(request, poll_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))    
+
+class IndexView(generic.DetailView):
+    template_name = 'base/index.html'
+    
+class MusicianView(generic.DetailView):
+    model = Musician
+    template_name = 'base/musician.html'        
+
+class ReviewerView(generic.DetailView):
+    model = Reviewer
+    template_name = 'base/reviewer.html'            
+
+class ReviewView(generic.DetailView):
+    model = Review
+    template_name = 'base/review.html'                

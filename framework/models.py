@@ -24,7 +24,7 @@ class User(models.Model):
     created = models.DateTimeField('Date account created', auto_now_add=True)
     email = models.EmailField()
     birth_date = models.DateField()
-    profile_picture = CloudinaryField('image')
+    profile_picture = CloudinaryField('image', null=True, blank=True)
     class Meta:
         abstract = True
 
@@ -33,12 +33,22 @@ class Musician(User):
 
 class Reviewer(User):
     pass
-    
-class Review(User):
-    artist = models.ForeignKey(Musician)
-    reviewer = models.ForeignKey(Reviewer)        
 
+class MusicianProduct(models.Model):
+    PRODUCT_TYPES = (('S', 'Song'), 
+                     ('A', 'Album'),
+                     ('C', 'Collection'))
+    musician = models.ForeignKey(Musician)    
+    product_type = models.CharField(max_length=1, choices=PRODUCT_TYPES)
+    description = models.TextField()
+    product_picture = CloudinaryField('image', null=True, blank=True)
+
+class Review(models.Model):
+    musician = models.ForeignKey(Musician)
+    reviewer = models.ForeignKey(Reviewer)        
+    product = models.ForeignKey(MusicianProduct)
     title = models.CharField(max_length=100)
     body = models.TextField()
     release_date = models.DateField()
     num_stars = models.IntegerField()
+

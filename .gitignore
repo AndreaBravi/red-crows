@@ -3,10 +3,6 @@
 
 *.sublime-workspace
 
-*.pyc
-
-*.pyc
-
 to_remember.py
 
 *.pyc
