@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 
-from framework.models import Choice, Poll, Musician, Review, Reviewer, MusicianProduct
+from framework.models import Choice, Poll, Musician, Review, Reviewer, Music
 
 userFields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
               'description', 'website', 'profile_picture']
@@ -49,9 +49,9 @@ class MusicianView(generic.DetailView):
     model = Musician
     template_name = 'base/musician.html'     
 
-class MusicianProductView(generic.DetailView):
-    model = MusicianProduct
-    template_name = 'base/musicianproduct.html'           
+class MusicView(generic.DetailView):
+    model = Music
+    template_name = 'base/music.html'           
 
 class ReviewerView(generic.DetailView):
     model = Reviewer
@@ -65,23 +65,41 @@ class ReviewView(generic.DetailView):
 
 class CreateMusicianView(generic.edit.CreateView):
     model = Musician
-    template_name = 'base/createmusician.html'
+    template_name = 'base/create/createmusician.html'
     fields = userFields
     success_url = 'thanks/'
 
 class CreateReviewerView(generic.edit.CreateView):
     model = Reviewer
-    template_name = 'base/createreviewer.html'
+    template_name = 'base/create/createreviewer.html'
     fields = userFields
     success_url = 'thanks/'
 
 # Lists
 
 class ListMusicianView(generic.ListView):
-    template_name = 'base/listmusician.html'
+    template_name = 'base/lists/listmusician.html'
     context_object_name = 'musician_list'
     def get_queryset(self):        
         return Musician.objects.order_by('-created')
+
+class ListReviewerView(generic.ListView):
+    template_name = 'base/lists/listreviewer.html'
+    context_object_name = 'reviewer_list'
+    def get_queryset(self):        
+        return Reviewer.objects.order_by('-created')
+
+class ListReviewView(generic.ListView):
+    template_name = 'base/lists/listreview.html'
+    context_object_name = 'review_list'
+    def get_queryset(self):        
+        return Review.objects.order_by('-created')
+
+class ListMusicView(generic.ListView):
+    template_name = 'base/lists/listmusic.html'
+    context_object_name = 'music_list'
+    def get_queryset(self):        
+        return Music.objects.order_by('-created')
 
 # Thanks
 

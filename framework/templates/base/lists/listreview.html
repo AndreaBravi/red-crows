@@ -1,0 +1,12 @@
+{% if review_list %}
+    <ul>
+    {% for review in review_list %}
+        <li><a href="{% url 'base:review' review.id %}">{{ review.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews are available.</p>
+{% endif %}
+
+<br><br>
+<a href="{% url 'base:index' %}">Return to menu</a><br><br>

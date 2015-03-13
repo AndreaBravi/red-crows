@@ -1,0 +1,12 @@
+{% if music_list %}
+    <ul>
+    {% for music in music_list %}
+        <li><a href="{% url 'base:music' music.id %}">{{ music.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No music is available.</p>
+{% endif %}
+
+<br><br>
+<a href="{% url 'base:index' %}">Return to menu</a><br><br>

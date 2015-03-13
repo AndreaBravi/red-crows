@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.db import models
 import datetime
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
 
 class Poll(models.Model):
     question = models.CharField(max_length=200)
@@ -18,7 +19,7 @@ class Choice(models.Model):
     def __unicode__(self): 
         return self.choice_text
 
-class User(models.Model):
+class AbstractUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)  
     birth_date = models.DateField()
@@ -34,15 +35,15 @@ class User(models.Model):
     def __unicode__(self):
         return u'%s %s' % (self.first_name, self.last_name)
 
-class Musician(User):
+class Musician(AbstractUser):
     number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
     number_products = models.PositiveSmallIntegerField(blank=True, null=True)
 
-class Reviewer(User):
+class Reviewer(AbstractUser):
     number_reviews_performed = models.PositiveSmallIntegerField(blank=True, null=True)
     job_title = models.CharField(max_length=50, blank=True)
 
-class MusicianProduct(models.Model):
+class Music(models.Model):
     PRODUCT_TYPES = (('S', 'Song'), 
                      ('A', 'Album'),
                      ('C', 'Collection'))
@@ -50,6 +51,7 @@ class MusicianProduct(models.Model):
     product_type = models.CharField(max_length=1, choices=PRODUCT_TYPES)
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    created = models.DateTimeField('Date product created', auto_now_add=True)
     product_picture = CloudinaryField('image', blank=True, null=True)
     average_score = models.PositiveSmallIntegerField(blank=True, null=True)
     def __unicode__(self):
@@ -61,7 +63,7 @@ class Review(models.Model):
     product = models.ForeignKey(MusicianProduct)
     title = models.CharField(max_length=100)
     body = models.TextField(blank=True)
-    time_created = models.DateTimeField('Date review created', auto_now_add=True)
+    created = models.DateTimeField('Date review created', auto_now_add=True)
     score = models.PositiveSmallIntegerField()
     def __unicode__(self):
         return u'%s: %s' % (self.reviewer, self.product)

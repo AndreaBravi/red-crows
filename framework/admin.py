@@ -1,5 +1,5 @@
 from django.contrib import admin
-from framework.models import Choice, Poll, Musician, Reviewer, Review, MusicianProduct
+from framework.models import Choice, Poll, Musician, Reviewer, Review, Music
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -24,12 +24,12 @@ class ReviewerAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     pass
 
-class MusicianProductAdmin(admin.ModelAdmin):        
+class MusicAdmin(admin.ModelAdmin):        
     pass
 
 admin.site.register(Musician, MusicianAdmin)
 admin.site.register(Reviewer, ReviewerAdmin)
 admin.site.register(Review, ReviewAdmin)
-admin.site.register(MusicianProduct, MusicianProductAdmin)
+admin.site.register(Music, MusicAdmin)
 
 
