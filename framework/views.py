@@ -75,6 +75,18 @@ class CreateReviewerView(generic.edit.CreateView):
     fields = userFields
     success_url = 'thanks/'
 
+class CreateMusicView(generic.edit.CreateView):
+    model = Music
+    template_name = 'base/create/createmusic.html'
+    fields = []
+    success_url = 'thanks/'
+
+class CreateReviewView(generic.edit.CreateView):
+    model = Review
+    template_name = 'base/create/createreview.html'
+    fields = []
+    success_url = 'thanks/'    
+
 # Lists
 
 class ListMusicianView(generic.ListView):

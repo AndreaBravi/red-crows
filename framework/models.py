@@ -60,7 +60,7 @@ class Music(models.Model):
 class Review(models.Model):
     musician = models.ForeignKey(Musician)
     reviewer = models.ForeignKey(Reviewer)        
-    product = models.ForeignKey(MusicianProduct)
+    product = models.ForeignKey(Music)
     title = models.CharField(max_length=100)
     body = models.TextField(blank=True)
     created = models.DateTimeField('Date review created', auto_now_add=True)
