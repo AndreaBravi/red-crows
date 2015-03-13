@@ -24,9 +24,8 @@ class ReviewerAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     pass
 
-class MusicianProductAdmin(admin.ModelAdmin):
+class MusicianProductAdmin(admin.ModelAdmin):        
     pass
-
 
 admin.site.register(Musician, MusicianAdmin)
 admin.site.register(Reviewer, ReviewerAdmin)

@@ -3,7 +3,10 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 
-from framework.models import Choice, Poll, Musician, Review, Reviewer
+from framework.models import Choice, Poll, Musician, Review, Reviewer, MusicianProduct
+
+userFields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
+              'description', 'website', 'profile_picture']
 
 class IndexView2(generic.ListView):
     template_name = 'polls/index.html'
@@ -39,12 +42,16 @@ def vote(request, poll_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))    
 
-class IndexView(generic.DetailView):
-    template_name = 'base/index.html'
+class IndexView(generic.base.TemplateView):
+    template_name = 'base/index.html'    
     
 class MusicianView(generic.DetailView):
     model = Musician
-    template_name = 'base/musician.html'        
+    template_name = 'base/musician.html'     
+
+class MusicianProductView(generic.DetailView):
+    model = MusicianProduct
+    template_name = 'base/musicianproduct.html'           
 
 class ReviewerView(generic.DetailView):
     model = Reviewer
@@ -52,4 +59,23 @@ class ReviewerView(generic.DetailView):
 
 class ReviewView(generic.DetailView):
     model = Review
-    template_name = 'base/review.html'                
+    template_name = 'base/review.html'
+
+# Create
+
+class CreateMusicianView(generic.edit.CreateView):
+    model = Musician
+    template_name = 'base/createmusician.html'
+    fields = userFields
+    success_url = 'thanks/'
+
+class CreateReviewerView(generic.edit.CreateView):
+    model = Reviewer
+    template_name = 'base/createreviewer.html'
+    fields = userFields
+    success_url = 'thanks/'
+
+# Thanks
+
+class ThanksView(generic.base.TemplateView):    
+    template_name = 'base/thanks.html'

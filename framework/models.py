@@ -20,19 +20,27 @@ class Choice(models.Model):
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)    
-    created = models.DateTimeField('Date account created', auto_now_add=True)
-    email = models.EmailField()
+    last_name = models.CharField(max_length=50)  
     birth_date = models.DateField()
-    profile_picture = CloudinaryField('image', null=True, blank=True)
+    artist_name = models.CharField(max_length=50, blank=True)    
+    description = models.TextField(blank=True)
+    website = models.URLField(blank=True)
+    email = models.EmailField()
+    # bank account
+    created = models.DateTimeField('Date account created', auto_now_add=True)    
+    profile_picture = CloudinaryField('image', blank=True, null=True)
     class Meta:
         abstract = True
+    def __unicode__(self):
+        return u'%s %s' % (self.first_name, self.last_name)
 
 class Musician(User):
-    pass
+    number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
+    number_products = models.PositiveSmallIntegerField(blank=True, null=True)
 
 class Reviewer(User):
-    pass
+    number_reviews_performed = models.PositiveSmallIntegerField(blank=True, null=True)
+    job_title = models.CharField(max_length=50, blank=True)
 
 class MusicianProduct(models.Model):
     PRODUCT_TYPES = (('S', 'Song'), 
@@ -40,15 +48,20 @@ class MusicianProduct(models.Model):
                      ('C', 'Collection'))
     musician = models.ForeignKey(Musician)    
     product_type = models.CharField(max_length=1, choices=PRODUCT_TYPES)
-    description = models.TextField()
-    product_picture = CloudinaryField('image', null=True, blank=True)
-
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    product_picture = CloudinaryField('image', blank=True, null=True)
+    average_score = models.PositiveSmallIntegerField(blank=True, null=True)
+    def __unicode__(self):
+        return u'%s - %s' % (self.musician, self.title)
+    
 class Review(models.Model):
     musician = models.ForeignKey(Musician)
     reviewer = models.ForeignKey(Reviewer)        
     product = models.ForeignKey(MusicianProduct)
     title = models.CharField(max_length=100)
-    body = models.TextField()
-    release_date = models.DateField()
-    num_stars = models.IntegerField()
-
+    body = models.TextField(blank=True)
+    time_created = models.DateTimeField('Date review created', auto_now_add=True)
+    score = models.PositiveSmallIntegerField()
+    def __unicode__(self):
+        return u'%s: %s' % (self.reviewer, self.product)
