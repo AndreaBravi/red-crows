@@ -1,0 +1,12 @@
+{% if musician_list %}
+    <ul>
+    {% for musician in musician_list %}
+        <li><a href="{% url 'base:musician' musician.id %}">{{ musician.last_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No musicians are available.</p>
+{% endif %}
+
+<br><br>
+<a href="{% url 'base:index' %}">Return to menu</a><br><br>

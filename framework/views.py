@@ -75,6 +75,14 @@ class CreateReviewerView(generic.edit.CreateView):
     fields = userFields
     success_url = 'thanks/'
 
+# Lists
+
+class ListMusicianView(generic.ListView):
+    template_name = 'base/listmusician.html'
+    context_object_name = 'musician_list'
+    def get_queryset(self):        
+        return Musician.objects.order_by('-created')
+
 # Thanks
 
 class ThanksView(generic.base.TemplateView):    
