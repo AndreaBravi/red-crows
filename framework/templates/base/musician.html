@@ -1,4 +1,6 @@
 
+{% load cloudinary %}
+
 Welcome Artist!
 <br><br>
 <p>{{ musician.first_name }}</p>
@@ -7,6 +9,9 @@ Welcome Artist!
 <p>{{ musician.email }}</p>
 <p>{{ musician.birth_date }}</p>
 <p>{{ musician.description }}</p>
+<p>{{ musician.website }}</p>
+
+{% cloudinary musician.profile_picture width=100 height=150 crop="fill" %}
 
 <br><br>
 <a href="{% url 'base:listmusician' %}">Return to artist list</a><br><br>

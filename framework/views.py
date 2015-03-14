@@ -2,8 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
-
-from framework.models import Choice, Poll, Musician, Review, Reviewer, Music
+from framework.models import Choice, Poll, Musician, Review, Reviewer, Music 
 
 userFields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
               'description', 'website', 'profile_picture']
@@ -119,3 +118,4 @@ class ListMusicView(generic.ListView):
 
 class ThanksView(generic.base.TemplateView):    
     template_name = 'base/thanks.html'
+
