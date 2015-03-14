@@ -78,14 +78,14 @@ class CreateReviewerView(generic.edit.CreateView):
 class CreateMusicView(generic.edit.CreateView):
     model = Music
     template_name = 'base/create/createmusic.html'
-    fields = ['product_type', 'title', 'description', 'product_picture']
+    fields = ['musician', 'product_type', 'title', 'description', 'product_picture']
     success_url = 'thanks/'
     # musician should be auto-populated
 
 class CreateReviewView(generic.edit.CreateView):
     model = Review
     template_name = 'base/create/createreview.html'
-    fields = ['musician', 'product', 'title', 'body', 'score']
+    fields = ['musician', 'reviewer', 'product', 'title', 'body', 'score']
     success_url = 'thanks/'
     # reviewer should be auto-populated
 

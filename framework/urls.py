@@ -16,6 +16,8 @@ urlpatterns = patterns('',
 
     url(r'^create/artist/thanks/$', views.ThanksView.as_view(), name='thanksmusician'),
     url(r'^create/reviewer/thanks/$', views.ThanksView.as_view(), name='thanksreviewer'),
+    url(r'^add/music/thanks/$', views.ThanksView.as_view(), name='thanksmusic'),
+    url(r'^add/review/thanks/$', views.ThanksView.as_view(), name='thanksreview'),    
 
     url(r'^artists/$', views.ListMusicianView.as_view(), name='listmusician'),
     url(r'^reviewers/$', views.ListReviewerView.as_view(), name='listreviewer'),
