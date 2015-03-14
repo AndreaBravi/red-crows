@@ -4,6 +4,7 @@ import datetime
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
+
 class Poll(models.Model):
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')    
@@ -38,7 +39,7 @@ class Musician(AbstractUser):
     number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
     number_products = models.PositiveSmallIntegerField(blank=True, null=True)
     artist_name = models.CharField(max_length=50, blank=True)
-    
+
 class Reviewer(AbstractUser):
     number_reviews_performed = models.PositiveSmallIntegerField(blank=True, null=True)
     job_title = models.CharField(max_length=50, blank=True)

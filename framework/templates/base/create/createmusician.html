@@ -1,4 +1,22 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
+    <script> 
+    	$(function() {
+    		$( "#id_birth_date" ).datepicker({
+    			dateFormat: "yy-mm-dd",
+    			changeMonth: true,
+    			changeYear: true,
+    			yearRange: "1950:2010"
+    		});
+    	}); 
+    </script>
+</head>
+<body>
 Welcome Musician!
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -9,3 +27,4 @@ Welcome Musician!
 
 <br><br>
 <a href="{% url 'base:index' %}">Home</a><br><br>
+</body>

@@ -3,7 +3,7 @@ This is the list of artists
 {% if musician_list %}
     <ul>
     {% for musician in musician_list %}
-        <li><a href="{% url 'base:musician' musician.id %}">{{ musician.last_name }}</a></li>
+        <li><a href="{% url 'base:musician' musician.id %}">{{ musician.artist_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

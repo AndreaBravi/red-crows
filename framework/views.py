@@ -3,9 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from framework.models import Choice, Poll, Musician, Review, Reviewer, Music 
-
-userFields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
-              'description', 'website', 'profile_picture']
+from framework.forms import MusicianForm
 
 class IndexView2(generic.ListView):
     template_name = 'polls/index.html'
@@ -46,6 +44,7 @@ class IndexView(generic.base.TemplateView):
     
 class MusicianView(generic.DetailView):
     model = Musician
+    form_class = MusicianForm
     template_name = 'base/musician.html'     
 
 class MusicView(generic.DetailView):
@@ -65,13 +64,15 @@ class ReviewView(generic.DetailView):
 class CreateMusicianView(generic.edit.CreateView):
     model = Musician
     template_name = 'base/create/createmusician.html'
-    fields = userFields
+    fields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
+              'description', 'website', 'profile_picture']
     success_url = 'thanks/'
 
 class CreateReviewerView(generic.edit.CreateView):
     model = Reviewer
     template_name = 'base/create/createreviewer.html'
-    fields = userFields
+    fields = ['first_name', 'last_name', 'birth_date', 'email', 'job_title', 
+              'description', 'website', 'profile_picture']    
     success_url = 'thanks/'
 
 class CreateMusicView(generic.edit.CreateView):
