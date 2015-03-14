@@ -18,7 +18,7 @@
             <input id="id_password"  class="login-input" name="password" placeholder="Password" type="password" />{{ form.password.errors }}<br>
             <div class="remember-forgot-section">
                 <input id="id_remember" name="remember" type="checkbox" />
-                <label for="id_remember">Remember Me</label>
+                <label for="id_remember">Remember Me</label><br>
                 <a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
             </div>
           {% if redirect_field_value %}
@@ -29,8 +29,9 @@
         </form>
 
         <div class="footnote">
-            Don't have an account? Login with Facebook above or <a href="{% url 'account_signup' %}">Sign Up</a>
+            Don't have an account? <a href="{% url 'account_signup' %}">Sign Up</a>
         </div>
     </div>
+<a href="{% url 'base:index' %}">Home</a><br><br>
 {% endblock %}
 
