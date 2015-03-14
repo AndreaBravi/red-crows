@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 from framework import views
 
@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^reviewers/$', views.ListReviewerView.as_view(), name='listreviewer'),
     url(r'^reviews/$', views.ListReviewView.as_view(), name='listreview'),
     url(r'^music/$', views.ListMusicView.as_view(), name='listmusic'),
+               
 )

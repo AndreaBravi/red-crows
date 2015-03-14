@@ -32,6 +32,24 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#
+
+TEMPLATE_CONTEXT_PROCESSORS = (    
+    # Required by allauth template tags
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.request",    
+    # allauth specific context processors
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount"    
+)
+
+AUTHENTICATION_BACKENDS = (    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"    
+)
+
 
 # Application definition
 
@@ -42,7 +60,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'framework'
+    'framework',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -114,3 +136,12 @@ cloudinary.config(
   api_key = "956651146695317", 
   api_secret = "YF8yeJ0M9Eda5n4jLDrZ-An3Cxo" 
 )
+
+# OTHER settings
+
+SITE_ID = 1
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 30
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
