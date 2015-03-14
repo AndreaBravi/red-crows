@@ -22,8 +22,7 @@ class Choice(models.Model):
 class AbstractUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)  
-    birth_date = models.DateField()
-    artist_name = models.CharField(max_length=50, blank=True)    
+    birth_date = models.DateField()        
     description = models.TextField(blank=True)
     website = models.URLField(blank=True)
     email = models.EmailField()
@@ -38,7 +37,8 @@ class AbstractUser(models.Model):
 class Musician(AbstractUser):
     number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
     number_products = models.PositiveSmallIntegerField(blank=True, null=True)
-
+    artist_name = models.CharField(max_length=50, blank=True)
+    
 class Reviewer(AbstractUser):
     number_reviews_performed = models.PositiveSmallIntegerField(blank=True, null=True)
     job_title = models.CharField(max_length=50, blank=True)

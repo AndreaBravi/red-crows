@@ -119,3 +119,4 @@ class ListMusicView(generic.ListView):
 class ThanksView(generic.base.TemplateView):    
     template_name = 'base/thanks.html'
 
+
