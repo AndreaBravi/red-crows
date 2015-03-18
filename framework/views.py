@@ -65,9 +65,9 @@ class CreateMusicianView(generic.edit.CreateView):
     template_name = 'base/create/createmusician.html'    
     success_url = 'thanks/'
     def post(self, request):
-        form = self.form_class(request.POST, request.FILES)
-        form.email = request.user.email
+        form = self.form_class(request.POST, request.FILES)        
         form = form.save(commit=False)
+        form.email = request.user.email
         form.user = request.user
         form.save()
         return HttpResponseRedirect(self.success_url)
@@ -77,10 +77,10 @@ class CreateReviewerView(generic.edit.CreateView):
     template_name = 'base/create/createreviewer.html'   
     success_url = 'thanks/'
     def post(self, request):
-        form = self.form_class(request.POST, request.FILES)
-        form.email = request.user.email
+        form = self.form_class(request.POST, request.FILES)        
         form = form.save(commit=False)
         form.user = request.user
+        form.email = request.user.email
         form.save()
         return HttpResponseRedirect(self.success_url)
 
