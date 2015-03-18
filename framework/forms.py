@@ -1,19 +1,15 @@
-from django import forms
-from django.forms import widgets
+from django.forms import ModelForm
+from framework.models import Musician, Reviewer
 
-from framework.models import Musician, Review, Reviewer, Music 
-from django.contrib.admin.widgets import AdminDateWidget
 
-# class AbstractUserForm(forms.ModelForm):
-#     birth_date = forms.DateField(widget=AdminDateWidget)
-
-class MusicianForm(forms.ModelForm):    
+class MusicianForm(ModelForm):
     class Meta:
         model = Musician
-        widgets = {'date': forms.DateInput(attrs={'class': 'datepicker'})}
+        fields = ['first_name', 'last_name', 'birth_date', 'artist_name', 
+                  'description', 'website', 'profile_picture']
 
-class ReviewerForm(forms.ModelForm):    
+class ReviewerForm(ModelForm):
     class Meta:
         model = Reviewer
-        widgets = {'date': forms.DateInput(attrs={'class': 'datepicker'})}
-
+        fields = ['first_name', 'last_name', 'birth_date', 'job_title', 
+                  'description', 'website', 'profile_picture']

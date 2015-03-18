@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from framework.models import Choice, Poll, Musician, Review, Reviewer, Music 
-from framework.forms import MusicianForm
+from framework.forms import MusicianForm, ReviewerForm
 
 class IndexView2(generic.ListView):
     template_name = 'polls/index.html'
@@ -43,8 +43,7 @@ class IndexView(generic.base.TemplateView):
     template_name = 'base/index.html'    
     
 class MusicianView(generic.DetailView):
-    model = Musician
-    form_class = MusicianForm
+    model = Musician    
     template_name = 'base/musician.html'     
 
 class MusicView(generic.DetailView):
@@ -61,19 +60,29 @@ class ReviewView(generic.DetailView):
 
 # Create
 
-class CreateMusicianView(generic.edit.CreateView):
-    model = Musician
-    template_name = 'base/create/createmusician.html'
-    fields = ['first_name', 'last_name', 'birth_date', 'email', 'artist_name', 
-              'description', 'website', 'profile_picture']
+class CreateMusicianView(generic.edit.CreateView):    
+    form_class = MusicianForm
+    template_name = 'base/create/createmusician.html'    
     success_url = 'thanks/'
+    def post(self, request):
+        form = self.form_class(request.POST)
+        form.email = request.user.email
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        return HttpResponseRedirect(self.success_url)
 
 class CreateReviewerView(generic.edit.CreateView):
-    model = Reviewer
-    template_name = 'base/create/createreviewer.html'
-    fields = ['first_name', 'last_name', 'birth_date', 'email', 'job_title', 
-              'description', 'website', 'profile_picture']    
+    form_class = ReviewerForm
+    template_name = 'base/create/createreviewer.html'   
     success_url = 'thanks/'
+    def post(self, request):
+        form = self.form_class(request.POST)
+        form.email = request.user.email
+        form = form.save(commit=False)
+        form.user = request.user
+        form.save()
+        return HttpResponseRedirect(self.success_url)
 
 class CreateMusicView(generic.edit.CreateView):
     model = Music

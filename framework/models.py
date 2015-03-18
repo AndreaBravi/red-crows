@@ -21,19 +21,21 @@ class Choice(models.Model):
         return self.choice_text
 
 class AbstractUser(models.Model):
+    class Meta:
+        abstract = True
+    user = models.ForeignKey(User)        
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)  
     birth_date = models.DateField()        
     description = models.TextField(blank=True)
     website = models.URLField(blank=True)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     # bank account
     created = models.DateTimeField('Date account created', auto_now_add=True)    
     profile_picture = CloudinaryField('image', blank=True, null=True)
-    class Meta:
-        abstract = True
     def __unicode__(self):
         return u'%s %s' % (self.first_name, self.last_name)
+    
 
 class Musician(AbstractUser):
     number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
@@ -55,6 +57,7 @@ class Music(models.Model):
     created = models.DateTimeField('Date product created', auto_now_add=True)
     product_picture = CloudinaryField('image', blank=True, null=True)
     average_score = models.PositiveSmallIntegerField(blank=True, null=True)
+    number_reviews_received = models.PositiveSmallIntegerField(blank=True, null=True)
     def __unicode__(self):
         return u'%s - %s' % (self.musician, self.title)
     
