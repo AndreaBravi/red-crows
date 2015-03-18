@@ -29,7 +29,7 @@ class AbstractUser(models.Model):
     birth_date = models.DateField()        
     description = models.TextField(blank=True)
     website = models.URLField(blank=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField() # unique=True
     # bank account
     created = models.DateTimeField('Date account created', auto_now_add=True)    
     profile_picture = CloudinaryField('image', blank=True, null=True)
